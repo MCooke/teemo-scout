@@ -6,7 +6,10 @@ const FuelSavingsTextInput = (props) => {
   };
 
   return (
-    <h1>Game Container</h1>
+  	<div>
+	    <h1>Game Container</h1>
+	    <p>This is going to be fun</p>
+    </div>
 	);
 };
 
