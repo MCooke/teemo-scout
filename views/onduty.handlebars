@@ -1,0 +1,11 @@
+{{title}}
+<pre>
+{{json data}}
+</pre>
+
+{{#each data.participants}}
+	<div>
+		<h1>{{summonerName}}</h1>
+		<p>{{json .}}</p>
+	</div>
+{{/each}}

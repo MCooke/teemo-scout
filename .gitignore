@@ -34,3 +34,6 @@ dist
 
 # Mac files
 .DS_Store
+
+#Config Files
+config.json
