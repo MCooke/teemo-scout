@@ -28,29 +28,31 @@ router.get('/', function(req, res, next) {
 	    json: true // Automatically parses the JSON string in the response 
 	};
 
-	console.log('uri', summonerOptions.uri);
+	console.log(summonerOptions.uri);
 	 
 	rp(summonerOptions)
 		.then(function (body) {
-			console.log(body);
 			searchOptions.id = body[Object.keys(body)[0]].id;
 
 			var currentGameOptions = {
-			    uri: 'https://' + searchOptions.region + '.api.pvp.net/observer-mode/rest/consumer/getSpectatorGameInfo/EUW1/' + searchOptions.id + '?api_key=' + apiKey,
+			    uri: 'https://' + searchOptions.region + '.api.pvp.net/observer-mode/rest/consumer/getSpectatorGameInfo/' + searchOptions.region + '1/' + searchOptions.id + '?api_key=' + apiKey,
 			    json: true // Automatically parses the JSON string in the response 
 			};
-
 			console.log(currentGameOptions.uri);
+
 			rp(currentGameOptions)
 				.then(function (body){
-					console.log('body',body);
+					// console.log('body',body);
 					res.render('onduty', { title: 'Express', data: body });
 				}).catch(function (err) {
-					console.log(err);
+					// console.log(err);
 					res.render('error', { error: err });
 				});
 		})
-		.catch(function (err) {res.render('error', { error: err });});
+		.catch(function (err) {
+			console.log('summonerLookup error', err);
+			res.render('error', { error: err });
+		});
 });
 
 module.exports = router;
