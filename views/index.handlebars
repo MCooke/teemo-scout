@@ -1,18 +1,10 @@
 <h1>index {{title}}</h1>
 <div class="container">
 	<form action="/onduty" method="GET">
-    <input type="text" class="col-xs-6" id="SummonerName" placeholder="Enter Summoner Name"> 
-    <div class="btn-group col-xs-6">
-      <button type="button" class="btn btn-success">EUW</button>
-      <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <span class="caret"></span>
-        <span class="sr-only">Toggle Dropdown</span>
-      </button>
-      <ul class="dropdown-menu">
-        <li><a href="#">EUNE</a></li>
-        <li><a href="#">NA</a></li>
-        <li><a href="#">OCE</a></li>
-        <li><a href="#">RU</a></li>
-      </ul>
-    </div>
+    <input type="text" class="col-xs-6" id="SummonerName" name="name" placeholder="Enter Summoner Name"> 
+		<select name="region" id="">
+			<option value="EUW" selected>EUW</option>
+		</select>
+		<button type="submit">ON DUTY</button>
+  </form>
 </div>
