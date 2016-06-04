@@ -1,5 +1,3 @@
-var champions = require('./data/champions.json');
-
 var register = function(Handlebars) {
 
     var helpers = {
@@ -13,6 +11,9 @@ var register = function(Handlebars) {
 
         	// go in fin
         	return "champion:" + champions.data[Object.keys(champions.data)[context]];
+        },
+        stripWhiteSpace: function (context) {
+        	return context.replace(' ', '');
         }
     };
 
