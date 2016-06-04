@@ -52,9 +52,10 @@ router.get('/', function(req, res, next) {
 
 			rp(currentGameOptions)
 				.then(function (body){
+
+					// Add Champion information to particpants. 
 					for(var i = 0; i < body.participants.length; i++) {
 						var championId = body.participants[i].championId;
-						console.log( body.participants[i].summonerName + ' - ' + champions.data[championId].name );
 						body.participants[i].championName = champions.data[championId].name;
 					}
 					res.render('onduty', { title: 'Express', data: body });
