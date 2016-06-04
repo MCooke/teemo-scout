@@ -5,8 +5,11 @@
 
 {{#each data.participants}}
 	<div>
-	<img src="http://ddragon.leagueoflegends.com/cdn/6.11.1/img/profileicon/{{profileIconId}}.png" alt="">
-		<h1>{{summonerName}}</h1>
+		<img src="http://ddragon.leagueoflegends.com/cdn/6.11.1/img/profileicon/{{profileIconId}}.png" alt="">
+		<div class="summonerSpell summonerSpell-{{spell1Id}}"></div>
+		<div class="summonerSpell summonerSpell-{{spell2Id}}"></div>
+		<img src="http://ddragon.leagueoflegends.com/cdn/6.11.1/img/champion/{{champion}}.png" alt="">
+		<h1>{{summonerName}} {{championId}} - {{championName}}</h1>
 		<p>{{json .}}</p>
 	</div>
 {{/each}}

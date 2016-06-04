@@ -13,7 +13,7 @@ var app = express();
 
 var hbs = exphbs.create({
   defaultLayout: 'main',
-  helpers: { json: function (context) { return JSON.stringify(context); } }
+  helpers: require('./helpers').helpers
 });
 
 // view engine setup

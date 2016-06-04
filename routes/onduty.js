@@ -5,8 +5,18 @@ var https = require('https');
 var config = require('../config.json');
 var apiKey = config.api_key;
 
-var data = '';
-
+var championOptions = {
+    uri: 'https://global.api.pvp.net/api/lol/static-data/euw/v1.2/champion?dataById=true&champData=all&api_key=' + apiKey,
+    json: true // Automatically parses the JSON string in the response 
+};
+var champions = '';
+rp(championOptions).then(
+		function(body){
+			console.log('After champlookup');
+			champions = body;
+		}
+	);
+console.log('start Onduty');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -28,7 +38,7 @@ router.get('/', function(req, res, next) {
 	    json: true // Automatically parses the JSON string in the response 
 	};
 
-	console.log(summonerOptions.uri);
+	// console.log(summonerOptions.uri);
 	 
 	rp(summonerOptions)
 		.then(function (body) {
@@ -38,11 +48,15 @@ router.get('/', function(req, res, next) {
 			    uri: 'https://' + searchOptions.region + '.api.pvp.net/observer-mode/rest/consumer/getSpectatorGameInfo/' + searchOptions.region + '1/' + searchOptions.id + '?api_key=' + apiKey,
 			    json: true // Automatically parses the JSON string in the response 
 			};
-			console.log(currentGameOptions.uri);
+			// console.log(currentGameOptions.uri);
 
 			rp(currentGameOptions)
 				.then(function (body){
-					// console.log('body',body);
+					for(var i = 0; i < body.participants.length; i++) {
+						var championId = body.participants[i].championId;
+						console.log( body.participants[i].summonerName + ' - ' + champions.data[championId].name );
+						body.participants[i].championName = champions.data[championId].name;
+					}
 					res.render('onduty', { title: 'Express', data: body });
 				}).catch(function (err) {
 					// console.log(err);
