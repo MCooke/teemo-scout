@@ -1,0 +1,49 @@
+.summonerSpell {
+	height: 20px;
+	width: 20px;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	&-1{
+		background-image: url('/images/summonerSpells/SummonerBarrier.png');
+	}
+	&-2{
+		background-image: url('/images/summonerSpells/SummonerBarrier.png');
+	}
+	&-3{
+		background-image: url('/images/summonerSpells/SummonerExhaust.png');
+	}
+	&-4{
+		background-image: url('/images/summonerSpells/SummonerFlash.png');
+	}
+	&-5{
+		background-image: url('/images/summonerSpells/SummonerBarrier.png');
+	}
+	&-6{
+		background-image: url('/images/summonerSpells/SummonerBarrier.png');
+	}
+	&-7{
+		background-image: url('/images/summonerSpells/SummonerHeal.png');
+	}
+	&-8{
+		background-image: url('/images/summonerSpells/SummonerBarrier.png');
+	}
+	&-9{
+		background-image: url('/images/summonerSpells/SummonerBarrier.png');
+	}
+	&-10{
+		background-image: url('/images/summonerSpells/SummonerBarrier.png');
+	}
+	&-11{
+		background-image: url('/images/summonerSpells/SummonerSmite.png');
+	}
+	&-12{
+		background-image: url('/images/summonerSpells/SummonerTeleport.png');
+	}
+	&-13{
+		background-image: url('/images/summonerSpells/SummonerBarrier.png');
+	}
+	&-14{
+		background-image: url('/images/summonerSpells/SummonerDot.png');
+	}
+}

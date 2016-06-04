@@ -18,7 +18,7 @@ module.exports = function(grunt) {
           style: 'expanded'
         },
         files: {                         // Dictionary of files
-          'public/stylesheets/main.css': 'src/scss/_main.scss'
+          'public/stylesheets/main.css': 'src/scss/main.scss'
         }
       }
     }
