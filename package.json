@@ -11,9 +11,13 @@
     "debug": "~2.2.0",
     "express": "~4.13.1",
     "express-handlebars": "^3.0.0",
+    "grunt": "1.0.1",
     "jade": "~1.11.0",
     "morgan": "~1.6.1",
     "request-promise": "3.0.0",
     "serve-favicon": "~2.3.0"
+  },
+  "devDependencies": {
+    "grunt-contrib-sass": "1.0.0"
   }
 }

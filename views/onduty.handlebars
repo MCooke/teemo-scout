@@ -1,15 +1,21 @@
-{{title}}
-<pre>
-{{json data}}
-</pre>
+<div class="container">
+	{{title}}
+	<pre>
+	{{json team1}}
+	</pre>
+</div>
 
-{{#each data.participants}}
-	<div>
-		<img src="http://ddragon.leagueoflegends.com/cdn/6.11.1/img/profileicon/{{profileIconId}}.png" alt="">
-		<div class="summonerSpell summonerSpell-{{spell1Id}}"></div>
-		<div class="summonerSpell summonerSpell-{{spell2Id}}"></div>
-		<img src="http://ddragon.leagueoflegends.com/cdn/6.11.1/img/champion/{{stripWhiteSpace championName}}.png" alt="">
-		<h1>{{summonerName}} {{championId}} - {{championName}}</h1>
-		<p>{{json .}}</p>
+<div class="container">
+	<div class="row">
+		<div class="col-sm-6">
+			{{#each team1}}
+				{{> team1Player}}
+			{{/each}}
+		</div>
+		<div class="col-sm-6">
+			{{#each team2}}
+				{{> team1Player}}
+			{{/each}}
+		</div>
 	</div>
-{{/each}}
+</div>

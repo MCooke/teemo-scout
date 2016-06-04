@@ -14,6 +14,14 @@ var register = function(Handlebars) {
         },
         stripWhiteSpace: function (context) {
         	return context.replace(' ', '');
+        },
+        ifCond: function (v1, v2, content) {
+        	if(v1 === v2) {
+        		console.log('yes');
+        	  return options.fn(this);
+        	}
+        	console.log('no');
+        	return options.inverse(this);
         }
     };
 

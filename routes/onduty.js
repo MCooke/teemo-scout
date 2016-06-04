@@ -52,20 +52,27 @@ router.get('/', function(req, res, next) {
 
 			rp(currentGameOptions)
 				.then(function (body){
+					var team1 = [];
+					var team2 = [];
 
 					// Add Champion information to particpants. 
 					for(var i = 0; i < body.participants.length; i++) {
 						var championId = body.participants[i].championId;
 						body.participants[i].championName = champions.data[championId].name;
+						if ( body.participants[i].teamId == "100") {
+							team1.push( body.participants[i] );
+						} else {
+							team2.push( body.participants[i] );
+						}
 					}
-					res.render('onduty', { title: 'Express', data: body });
+					res.render('onduty', { title: 'Express', data: body, team1: team1, team2: team2 });
 				}).catch(function (err) {
 					// console.log(err);
 					res.render('error', { error: err });
 				});
 		})
 		.catch(function (err) {
-			console.log('summonerLookup error', err);
+			// console.log('summonerLookup error', err);
 			res.render('error', { error: err });
 		});
 });
