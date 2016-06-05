@@ -1,19 +1,19 @@
 <div class="container">
 	{{title}}
 	<pre>
-	{{json team1}}
+	{{json data}}
 	</pre>
 </div>
 
 <div class="container">
 	<div class="row">
 		<div class="col-sm-6">
-			{{#each team1}}
+			{{#each data.team1}}
 				{{> team1Player}}
 			{{/each}}
 		</div>
 		<div class="col-sm-6">
-			{{#each team2}}
+			{{#each data.team2}}
 				{{> team1Player}}
 			{{/each}}
 		</div>
