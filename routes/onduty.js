@@ -38,38 +38,72 @@ router.get('/', function(req, res, next) {
 	    json: true // Automatically parses the JSON string in the response 
 	};
 
-	// console.log(summonerOptions.uri);
-	 
 	rp(summonerOptions)
-		.then(function (body) {
-			searchOptions.id = body[Object.keys(body)[0]].id;
+		.then(function (result1) {
+			// SUMMONER LOOKUP - To get summoner id.
+
+			searchOptions.id = result1[Object.keys(result1)[0]].id;
 
 			var currentGameOptions = {
 			    uri: 'https://' + searchOptions.region + '.api.pvp.net/observer-mode/rest/consumer/getSpectatorGameInfo/' + searchOptions.region + '1/' + searchOptions.id + '?api_key=' + apiKey,
 			    json: true // Automatically parses the JSON string in the response 
 			};
-			// console.log(currentGameOptions.uri);
 
-			rp(currentGameOptions)
-				.then(function (body){
-					var team1 = [];
-					var team2 = [];
+			return rp(currentGameOptions);
+		})
+		.then(function(result2) {
+			var participantsList = '';
 
-					// Add Champion information to particpants. 
-					for(var i = 0; i < body.participants.length; i++) {
-						var championId = body.participants[i].championId;
-						body.participants[i].championName = champions.data[championId].name;
-						if ( body.participants[i].teamId == "100") {
-							team1.push( body.participants[i] );
-						} else {
-							team2.push( body.participants[i] );
-						}
+			for(var i = 0; i < result2.participants.length; i++) {
+				var championId = result2.participants[i].championId;
+				participantsList += result2.participants[i].summonerId + ",";
+			}
+
+			result2.participantsList = participantsList;
+
+			var rankedStatsOptions = {
+			    uri: 'https://euw.api.pvp.net/api/lol/euw/v2.5/league/by-summoner/' + result2.participantsList + '?api_key=' + apiKey,
+			    json: true // Automatically parses the JSON string in the response 
+			};
+
+			return rp(rankedStatsOptions).then( function(reply){
+				result2.leagues = reply;
+				return result2;
+			});
+		})
+		.then(function(result) {
+			// console.log('leagues', result)
+
+			result.team1 = [];
+			result.team2 = [];
+
+			console.log('before result.participants.length', result.participants.length);
+			// Add Champion information to particpants. 
+			// console.log('result.leagues', result.leagues);
+			for(var i = 0; i < result.participants.length; i++) {
+				var championId = result.participants[i].championId;
+
+				console.log('result.leagues.length', Object.keys(result.leagues).length);
+				// result.leagues.forEach(function(element, index, array){
+				// 	 console.log('a[' + index + '] = ' + element);
+				// });
+				for(var j = 0; j < Object.keys(result.leagues).length; j++) {
+					var thisLeagueResult = result.leagues[Object.keys(result.leagues)[j]][0];
+					console.log('thing', thisLeagueResult.participantId);
+					if (thisLeagueResult.participantId == result.participants[i].summonerId){
+						result.participants[i].league = thisLeagueResult;
 					}
-					res.render('onduty', { title: 'Express', data: body, team1: team1, team2: team2 });
-				}).catch(function (err) {
-					// console.log(err);
-					res.render('error', { error: err });
-				});
+				}
+
+				result.participants[i].championName = champions.data[championId].name;
+				if ( result.participants[i].teamId == "100") {
+					result.team1.push( result.participants[i] );
+				} else {
+					result.team2.push( result.participants[i] );
+				}
+			}
+
+			res.render('onduty', { title: 'Express', data: result });
 		})
 		.catch(function (err) {
 			// console.log('summonerLookup error', err);
